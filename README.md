@@ -74,9 +74,9 @@ SELECT DATE_FORMAT('20211225', '%Y-%m-%d'); -- 문자열 '20211225'를 'YYYY-MM-
 
 
 
-## 3. 테이블 만들고 변경하기&#x20;
+## 3. DB, 테이블, 컬럼&#x20;
 
-### 1) 명명 규칙(데이터 베이스, 테이블, 컬럼)&#x20;
+### 1) 명명 규칙
 
 1. 문자, 숫자를 사용합니다.
 2. 이름에 쓰이는 문자는 주로 영문 소문자를 사용합니다.&#x20;
@@ -91,10 +91,27 @@ SELECT DATE_FORMAT('20211225', '%Y-%m-%d'); -- 문자열 '20211225'를 'YYYY-MM-
    * 테이블 이름은 하나의 데이터베이스 내에서는 중복될 수 없습니다. &#x20;
    * 컬럼 이름은 하나의 테이블 내에서는 중복될 수 없습니다.
 
-### 2) 테이블 만들기 / 지우기&#x20;
+### 2) DB&#x20;
 
-<pre class="language-sql"><code class="lang-sql">1. 테이블 만들기 
-CREATE TABLE idol (
+```sql
+1. 만들기 
+CREATE DATABASE [데이터 베이스 이름]; 
+
+2. 목록 보기 
+SHOW DATABASES; -- S를 꼭 붙여야 함! 
+
+3. 사용
+USE [데이터 베이스 이름]; 
+
+4. 지우기 
+DROP DATABASE [데이터 베이스 이름]; -- DB를 삭제
+DROP DATABASE IF EXISTS [데이터 베이스 이름]; -- DB가 존재한다면 삭제
+```
+
+### 2) 테이블
+
+<pre class="language-sql"><code class="lang-sql">1. 만들기 
+CREATE TABLE idol ( 
 <strong>        name VARCHAR(20), 
 </strong><strong>        age INT,
 </strong><strong>        group VARCHAR(50)
@@ -104,44 +121,41 @@ CREATE TABLE idol (
 쿼리에서는 기능적으로는 대소문자 구분이 필요 없으나, 가독성을 위해 
 보통 키워드나 함수명은 대문자, 사용자가 정의한 이름에는 소문자를 사용한다는 규칙이 있습니다.
 
-2-1. DROP TABLE [테이블 이름]; -- 테이블을 통째로 삭제 
-     DROP TABLE IF EXISTS [테이블 이름]; -- 테이블이 존재하다면, 통째로 삭제
-     DROP DATABASE IF EXISTS [테이블 이름]; -- DB가 존재한다면, 통째로 삭제
-2-2. TRUNCATE TABLE [테이블 이름]; -- 테이블은 유지하고, 값만 삭제 
+2. 지우기 
+DROP TABLE [테이블 이름]; -- 테이블을 통째로 삭제 
+DROP TABLE IF EXISTS [테이블 이름]; -- 테이블이 존재하다면, 통째로 삭제 
 
+3. 테이블의 값만 지우기    
+TRUNCATE TABLE [테이블 이름]; -- 테이블은 유지하고, 값만 삭제
 
+4. 이름 변경 
+ALTER TABLE [테이블 이름] RENAME [새로운 테이블 이름];
+ALTER TABLE costomor RENAME customers; 
 </code></pre>
 
-### 3)  테이블  이름 변경, 컬럼 추가 / 변경 / 지우기&#x20;
+### 3)  컬럼&#x20;
 
-<pre class="language-sql"><code class="lang-sql"><strong>1. 테이블 변경 
-</strong><strong>ALTER TABLE [테이블 이름] RENAME [새로운 테이블 이름];
-</strong>ALTER TABLE costomor RENAME customers; 
-
-2. 새 컬럼 추가 
-ALTER TABLE [테이블 이름] ADD COLUMN [컬럼 이름][데이터 타입];
+```sql
+1. 새 컬럼 추가 
+ALTER TABLE [테이블 이름] ADD COLUMN [컬럼 이름] [데이터 타입];
 ALTER TABLE customers ADD COLUMN age INT;
 
-3. 기존 컬럼 타입 변경 
-ALTER TABLE [테이블 이름] MODIFY COLUMN [컬럼 이름][새로운 데이터 타입];
+2. 기존 컬럼의 타입 변경 
+ALTER TABLE [테이블 이름] MODIFY COLUMN [컬럼 이름] [새로운 데이터 타입];
 ALTER TABLE customers MODIFY COLUMN age FLOAT;
 
-4. 기존 컬럼 타입 변경 
+3. 기존 컬럼의 이름과타입 변경 
 ALTER TABLE [테이블 이름] 
-CHANGE COLUMN [컬럼 이름][새로운 컬럼 이름][새로운 데이터 타입];
+CHANGE COLUMN [현재 컬럼 이름] [새로운 컬럼 이름] [새로운 데이터 타입];
 ALTER TABLE customers 
 CHANGE COLUMN age new_age FLOAT;
 
-5. 컬럼 지우기
+4. 컬럼 지우기
 ALTER TABLE [테이블 이름] DROP COLUMN [컬럼 이름];
 ALTER TABLE customers DROP COLUMN new_age;
-</code></pre>
+```
 
 
-
-### 4) 데이터 베이스 지우
-
-### 5)  테이블 \~&#x20;
 
 
 
