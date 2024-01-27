@@ -79,7 +79,7 @@ SELECT DATE_FORMAT('20211225', '%Y-%m-%d'); -- 문자열 '20211225'를 'YYYY-MM-
 ### 1) 명명 규칙
 
 1. 문자, 숫자를 사용합니다.
-2. 이름에 쓰이는 문자는 주로 영문 소문자를 사용합니다.&#x20;
+2. 이름에 쓰이는 문자는 주로 영문 소문자(lower case)를 사용합니다.&#x20;
    * 한글도 사용은 가능하지만 인코딩 이슈로 주로 영문 사용 .&#x20;
    * 보통 키워드나 함수명은 대문자, 사용자가 정의한 이름에는 소문자 사용
 3. 예약어는 사용할 수 없습니다.&#x20;
@@ -91,15 +91,18 @@ SELECT DATE_FORMAT('20211225', '%Y-%m-%d'); -- 문자열 '20211225'를 'YYYY-MM-
    * 테이블 이름은 하나의 데이터베이스 내에서는 중복될 수 없습니다. &#x20;
    * 컬럼 이름은 하나의 테이블 내에서는 중복될 수 없습니다.
 
-### 2) DB&#x20;
+### 2) DB (Schema)&#x20;
 
-<pre class="language-sql"><code class="lang-sql"><strong>1. 만들기 
+<pre class="language-sql"><code class="lang-sql">- 여러 사람이 공유하고 사용할 목적으로 통합 관리되는 데이터 저장소
+<strong>- 테이블을 저장해두는 저장소 = 스키마(Schema)
+</strong><strong>
+</strong><strong>1. 만들기 
 </strong>CREATE DATABASE [데이터 베이스 이름]; 
 
-2. 목록 보기 
+2. 존재하는 모든 목록 보기
 SHOW DATABASES; -- S를 꼭 붙여야 함! 
 
-3. 사용
+3. 특정 DB를 사용
 USE [데이터 베이스 이름]; 
 
 4. 지우기 
@@ -107,15 +110,23 @@ DROP DATABASE [데이터 베이스 이름]; -- DB를 삭제
 DROP DATABASE IF EXISTS [데이터 베이스 이름]; -- DB가 존재한다면 삭제
 </code></pre>
 
-### 3) 테이블
+### 3) 테이블&#x20;
 
-<pre class="language-sql"><code class="lang-sql">1. 만들기 
-CREATE TABLE idol ( 
+<pre class="language-sql"><code class="lang-sql">- DB에서 데이터를 형태를 정해서 모아 놓은 저장 공간 
+- 행과 열로 구성된 데이터 표
+
+1. 만들기 
+CREATE TABLE [테이블 이름] (
+        [컬럼 이름] [데이터 타입], 
+        [컬럼 이름] [데이터 타입],
+        ... 
+        ); 
+CREATE TABLE idol (
 <strong>        name VARCHAR(20), 
 </strong><strong>        age INT,
-</strong><strong>        group VARCHAR(50)
-</strong>);
-
+</strong><strong>        team VARCHAR(50)
+</strong><strong>        );
+</strong>
 2. 지우기 
 DROP TABLE [테이블 이름]; -- 테이블을 통째로 삭제 
 DROP TABLE IF EXISTS [테이블 이름]; -- 테이블이 존재하다면, 통째로 삭제 
@@ -148,11 +159,24 @@ ALTER TABLE [테이블 이름] DROP COLUMN [컬럼 이름];
 ALTER TABLE customers DROP COLUMN new_age;
 ```
 
+### 5)  데이터&#x20;
 
+<pre class="language-sql"><code class="lang-sql">1. 삽입 
+INSERT INTO [테이블 이름] ([컬럼1 이름], [컬럼2 이름], [컬럼3 이름])
+                 VALUES ([컬럼1 값], [컬럼2값] 컬럼3 값]),
+                        ([컬럼1 값], [컬럼2값], [컬럼3 값]),
+                        ([컬럼1 값], [컬럼2값], [컬럼3 값]);
 
+* 테이블 내 리스트 갯수와 VALUES 리스트 갯수가 불일치하면 에러 발생
 
+INSERT INTO idol (name, age, group)
+VALUES ("제니", 27, "블랙핑크"); 
+  
+2. 삭제 
+DELETE FROM [테이블 이름]
+WHERE [조건 값]; -- 삭제할 데이터의 조건 값을 입력(특정 데이터 삭제를 위함) 
 
-
-
-
-
+3. 수정
+UPDATE [테이블 이름]
+<strong>SET [컬럼 이름] = [새 값] WHERE [조건 값]; -- 특정 데이터만 수정하기위함
+</strong></code></pre>
