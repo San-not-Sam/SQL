@@ -93,11 +93,12 @@ SELECT DATE_FORMAT('20211225', '%Y-%m-%d'); -- 문자열 '20211225'를 'YYYY-MM-
 
 ### 2) DB (Schema)&#x20;
 
-<pre class="language-sql"><code class="lang-sql">- 여러 사람이 공유하고 사용할 목적으로 통합 관리되는 데이터 저장소
-<strong>- 테이블을 저장해두는 저장소 = 스키마(Schema)
-</strong><strong>
-</strong><strong>1. 만들기 
-</strong>CREATE DATABASE [데이터 베이스 이름]; 
+```sql
+- 여러 사람이 공유하고 사용할 목적으로 통합 관리되는 데이터 저장소
+- 테이블을 저장해두는 저장소 = 스키마(Schema)
+
+1. 만들기 
+CREATE DATABASE [데이터 베이스 이름]; 
 
 2. 존재하는 모든 목록 보기
 SHOW DATABASES; -- S를 꼭 붙여야 함! 
@@ -108,11 +109,12 @@ USE [데이터 베이스 이름];
 4. 지우기 
 DROP DATABASE [데이터 베이스 이름]; -- DB를 삭제
 DROP DATABASE IF EXISTS [데이터 베이스 이름]; -- DB가 존재한다면 삭제
-</code></pre>
+```
 
 ### 3) 테이블&#x20;
 
-<pre class="language-sql"><code class="lang-sql">- DB에서 데이터를 형태를 정해서 모아 놓은 저장 공간 
+```sql
+- DB에서 데이터를 형태를 정해서 모아 놓은 저장 공간 
 - 행과 열로 구성된 데이터 표
 
 1. 만들기 
@@ -122,11 +124,10 @@ CREATE TABLE [테이블 이름] (
         ... 
         ); 
 CREATE TABLE idol (
-<strong>        name VARCHAR(20), 
-</strong><strong>        age INT,
-</strong><strong>        team VARCHAR(50)
-</strong><strong>        );
-</strong>
+        name VARCHAR(20), 
+        age INT,
+        team VARCHAR(50)
+        );
 2. 지우기 
 DROP TABLE [테이블 이름]; -- 테이블을 통째로 삭제 
 DROP TABLE IF EXISTS [테이블 이름]; -- 테이블이 존재하다면, 통째로 삭제 
@@ -137,7 +138,7 @@ TRUNCATE TABLE [테이블 이름]; -- 테이블은 유지하고, 값만 삭제
 4. 이름 변경 
 ALTER TABLE [테이블 이름] RENAME [새로운 테이블 이름];
 ALTER TABLE costomor RENAME customers; 
-</code></pre>
+```
 
 ### 4)  컬럼&#x20;
 
@@ -161,7 +162,8 @@ ALTER TABLE customers DROP COLUMN new_age;
 
 ### 5)  데이터&#x20;
 
-<pre class="language-sql"><code class="lang-sql">1. 삽입 
+```sql
+1. 삽입 
 INSERT INTO [테이블 이름] ([컬럼1 이름], [컬럼2 이름], [컬럼3 이름])
                  VALUES ([컬럼1 값], [컬럼2값] 컬럼3 값]),
                         ([컬럼1 값], [컬럼2값], [컬럼3 값]),
@@ -178,5 +180,5 @@ WHERE [조건 값]; -- 삭제할 데이터의 조건 값을 입력(특정 데이
 
 3. 수정
 UPDATE [테이블 이름]
-<strong>SET [컬럼 이름] = [새 값] WHERE [조건 값]; -- 특정 데이터만 수정하기위함
-</strong></code></pre>
+SET [컬럼 이름] = [새 값] WHERE [조건 값]; -- 특정 데이터만 수정하기 위함
+```
