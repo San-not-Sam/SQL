@@ -1,6 +1,18 @@
+---
+layout:
+  title:
+    visible: true
+  description:
+    visible: false
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
+---
+
 # 데이터베이스 다루기
-
-
 
 ## 1. 데이터 타입 알아보기&#x20;
 
